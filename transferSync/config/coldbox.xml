@@ -1,0 +1,14 @@
+<YourSettings>
+	<!-- required -->
+	<Setting name="TransferSync_gatewayName" 			value="TransferSync_appName" />
+	<Setting name="TransferSync_JMSTopic" 				value="dynamicTopics/TransferSync_appName" />
+	<!-- optional 
+	<Setting name="TransferSync_enableLogging" 			value="true" />
+	<Setting name="TransferSync_logPath" 				value="TransferSync_appName" />
+	<Setting name="TransferSync_enableDebug" 			value="true" />
+	<Setting name="TransferSync_debugPath" 				value="" />
+	<Setting name="TransferSync_enableOnInit" 			value="false" />
+	<Setting name="TransferSync_excludeList" 			value="" />
+	<Setting name="TransferSync_enableCachedParents" 	value="false" />
+	-->
+</YourSettings>

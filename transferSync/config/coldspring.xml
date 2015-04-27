@@ -1,0 +1,65 @@
+<beans>
+
+	<bean id="TransferFactory" class="transfer.TransferFactory">
+		<constructor-arg name="datasourcePath">
+			<value>/config/datasource.xml</value>
+		</constructor-arg>
+		<constructor-arg name="configPath">
+		   <value>/config/transfer.xml</value>
+		</constructor-arg>
+		<constructor-arg name="definitionPath">
+		   <value>/model/definition</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="Transfer" factory-bean="TransferFactory" factory-method="getTransfer" />
+	
+	<bean id="TransferKeyRetriever" class="model.transfer.TransferKeyRetriever" lazy-init="false">
+		<constructor-arg name="transfer">
+            <ref bean="Transfer" />
+        </constructor-arg>
+		<constructor-arg name="definitionPath">
+		   <value>/model/definition</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="TransferSyncObserver" class="model.transfer.TransferSyncObserver" lazy-init="false">
+		<!-- required -->
+		<constructor-arg name="transfer">
+			<ref bean="Transfer" />
+		</constructor-arg>
+		<constructor-arg name="keyRetriever">
+            <ref bean="TransferKeyRetriever" />
+        </constructor-arg>
+		<constructor-arg name="gatewayName">
+		   <value>TransferSync_appName</value>
+		</constructor-arg>
+		<constructor-arg name="JMSTopic">
+		   <value>dynamicTopics/TransferSync_appName</value>
+		</constructor-arg>
+		<!-- optional
+		<constructor-arg name="enableLogging">
+		   <value>true</value>
+		</constructor-arg>
+		<constructor-arg name="logPath">
+		   <value>TransferSync_appName</value>
+		</constructor-arg>
+		<constructor-arg name="enableDebug">
+		   <value>true</value>
+		</constructor-arg>
+		<constructor-arg name="debugPath">
+		   <value></value>
+		</constructor-arg>
+		<constructor-arg name="enableOnInit">
+		   <value>false</value>
+		</constructor-arg>
+		<constructor-arg name="excludeList">
+		   <value></value>
+		</constructor-arg>
+		<constructor-arg name="enableCachedParents">
+		   <value>false</value>
+		</constructor-arg>
+		-->
+	</bean>
+	
+</beans>

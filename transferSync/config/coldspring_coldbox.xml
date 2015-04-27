@@ -1,0 +1,46 @@
+<bean id="TransferKeyRetriever" class="model.transfer.TransferKeyRetriever" lazy-init="false">
+	<constructor-arg name="transfer">
+        <ref bean="Transfer" />
+    </constructor-arg>
+	<constructor-arg name="definitionPath">
+		<value>${Transfer_DefinitionPath}</value>
+	</constructor-arg>
+</bean>
+
+<bean id="TransferSyncObserver" class="transferSync.model.transfer.TransferSyncObserver" lazy-init="false">
+	<constructor-arg name="transfer">
+		<ref bean="Transfer" />
+	</constructor-arg>
+	<constructor-arg name="keyRetriever">
+        <ref bean="TransferKeyRetriever" />
+    </constructor-arg>
+	<constructor-arg name="gatewayName">
+	  <value>${TransferSync_gatewayName}</value>
+	</constructor-arg>
+	<constructor-arg name="JMSTopic">
+	  <value>${TransferSync_JMSTopic}</value>
+	</constructor-arg>
+	<!-- optional
+	<constructor-arg name="enableLogging">
+	   <value>${TransferSync_enableLogging}</value>
+	</constructor-arg>
+	<constructor-arg name="logPath">
+	   <value>${TransferSync_logPath}</value>
+	</constructor-arg>
+	<constructor-arg name="enableDebug">
+		<value>${TransferSync_enableDebug}</value>
+	</constructor-arg>
+	<constructor-arg name="debugPath">
+		<value>${TransferSync_debugPath}</value>
+	</constructor-arg>
+	<constructor-arg name="enableOnInit">
+		<value>${TransferSync_enableOnInit}</value>
+	</constructor-arg>
+	<constructor-arg name="excludeList">
+		<value>${TransferSync_excludeList}</value>
+	</constructor-arg>
+	<constructor-arg name="enableCachedParents">
+		<value>${TransferSync_enableCachedParents}</value>
+	</constructor-arg>
+	-->
+</bean>
